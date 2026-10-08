@@ -1,11 +1,25 @@
 ---
-import ArrowDownIcon from '/src/assets/arrow-down.svg?raw';
-import { siteData } from '../../data/site-data'
+import { Image } from "astro:assets";
+import ArrowDownIcon from "../../assets/arrow-down.svg?raw";
+
+interface Props {
+  image: ImageMetadata;
+  alt?: string;
+  linkHref?: string;
+  linkLabel?: string;
+}
+
+const { image, alt = "", linkHref, linkLabel = "View content" } = Astro.props;
 ---
+
 <div class="hero">
-  <img src="/src/assets/hero.jpg" alt="Hero Image" draggable="false" />
-  <a href={siteData.heroIcon.href} class="hero__skip-link flow">
-    <span class="hero__skip-link-icon"><div class="hero__skip-link-icon__inner" set:html={ArrowDownIcon}></div></span>
-    <span class="hero__skip-link-label">{siteData.heroIcon.label}</span>
-  </a>
+  <Image src={image} alt={alt} loading="eager" draggable="false" />
+  {linkHref && (
+    <a href={linkHref} class="hero__skip-link flow">
+      <span class="hero__skip-link-icon">
+        <div class="hero__skip-link-icon__inner" set:html={ArrowDownIcon} />
+      </span>
+      <span class="hero__skip-link-label">{linkLabel}</span>
+    </a>
+  )}
 </div>

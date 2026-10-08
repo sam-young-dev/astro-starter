@@ -24,8 +24,8 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgb(0 0 0 / 0%) 0%,
-    rgb(0 0 0 / 50%) 100%
+    var(--color-alpha-black-00) 0%,
+    var(--color-alpha-black-50) 100%
   );
 }
 
@@ -36,11 +36,11 @@
   grid-column: 1;
   grid-row: 2;
   z-index: 1;
-  font-weight: var(--font-medium);
+  font-weight: var(--font-weight-medium);
   font-size: var(--size-step-0);
   text-align: center;
   text-decoration: none;
-  line-height: var(--leading-fine);
+  line-height: var(--leading-title);
   color: var(--skip-link-color);
   max-width: 12ch;
 }

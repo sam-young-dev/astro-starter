@@ -1,10 +1,20 @@
 .site-head {
   text-transform: uppercase;
   letter-spacing: var(--uppercase-kerning);
-  line-height: var(--leading-flat);
-  font-size: var(--size-step-00);
-  font-weight: var(--font-bold);
-  padding-block-start: var(--space-md);
+  line-height: var(--leading-none);
+  font-size: var(--size-step--1);
+  font-weight: var(--font-weight-bold);
+  padding-block: var(--space-md);
+}
+
+.site-head a {
+  text-decoration: none;
+}
+
+.site-head__nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 0.125em;
+  text-underline-offset: 0.4em;
 }
 
 .site-head .repel {
@@ -12,23 +22,61 @@
 }
 
 .site-head__brand {
-  container-type: inline-size;
-  container-name: site-head-brand;
-  flex-basis: clamp(25ch, 60%, 50rem);
-  flex-grow: 1;
+  flex: 1 1 auto;
 }
 
-.site-head__brand a:not(:hover) {
-  text-decoration: none;
+.site-head__button {
+  padding: var(--space-3xs);
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
 }
 
-.site-head hr {
-  --flow-space: var(--space-md);
-  --hr-stroke: var(--stroke-width) solid var(--color-brand-primary);
+.site-head__toggle {
+  display: none;
 }
 
-@container site-head-brand (68vi <= width <= 50rem) {
-  .site-head__brand a {
-    color: var(--color-foreground-inverse);
+.site-head__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/*
+  Mobile menu. Custom properties can't be used in media queries, so this
+  40rem breakpoint is a literal. Keep it in sync if you change it.
+  The open menu overlays the page below the header instead of pushing it down.
+  The menu only collapses once JS has set [data-nav-js], so the nav is
+  always usable without JavaScript.
+*/
+@media (width < 40rem) {
+  .site-head[data-nav-js] .site-head__toggle {
+    display: inline-flex;
+    order: 1;
+  }
+
+  /* .wrapper is the positioned ancestor */
+  .site-head[data-nav-js] .site-head__nav {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 100%;
+    z-index: 1;
+    padding: var(--space-md) var(--wrapper-padding-inline, 1rem);
+    background: var(--color-background-base);
+    border-block-end: var(--stroke-solid);
+  }
+
+  .site-head[data-nav-js]:not([data-nav-open]) .site-head__nav {
+    display: none;
+  }
+
+  .site-head[data-nav-js] .site-head__nav .cluster {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

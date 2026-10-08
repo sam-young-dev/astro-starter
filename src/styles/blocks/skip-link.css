@@ -1,0 +1,14 @@
+.skip-link {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 10;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-fill-loud);
+  color: var(--color-foreground-inverse);
+  transform: translateY(-100%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
