@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// The "home" entry is served at "/"; every other entry at "/<slug>".
+export async function getStaticPaths() {
+  const pages = await getCollection("pages");
+  return pages.map((page) => ({
+    params: { slug: page.id === "home" ? undefined : page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<BaseLayout
+  title={page.id === "home" ? undefined : page.data.title}
+  description={page.data.description}
+>
+  <div class="region wrapper">
+    <div class="prose">
+      <h1>{page.data.title}</h1>
+      <Content />
+    </div>
+  </div>
+</BaseLayout>

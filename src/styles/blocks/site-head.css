@@ -11,6 +11,12 @@
   text-decoration: none;
 }
 
+.site-head__nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 0.125em;
+  text-underline-offset: 0.4em;
+}
+
 .site-head .repel {
   --gutter: var(--space-md);
 }
@@ -39,96 +45,6 @@
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-/* Show the icon for the mode a click switches to */
-.site-head__icon--sun,
-[data-mode="dark"] .site-head__icon--moon {
-  display: none;
-}
-
-[data-mode="dark"] .site-head__icon--sun {
-  display: block;
-}
-
-/* Theme toggle: a pill switch showing both icons, with a thumb on the active mode */
-.site-head__theme {
-  --toggle-height: 1.75rem;
-  --toggle-pad: 0.25rem;
-  --thumb-size: calc(var(--toggle-height) - var(--toggle-pad) * 2 - 2px);
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  inline-size: calc(var(--toggle-height) * 2);
-  block-size: var(--toggle-height);
-  padding: var(--toggle-pad);
-  border: var(--stroke-solid);
-  border-radius: 999px;
-  background: var(--color-fill-normal);
-  color: var(--color-text-quiet);
-  transition: background-color var(--transition-base);
-}
-
-.site-head__theme[hidden] {
-  display: none;
-}
-
-.site-head__theme:hover {
-  background: var(--color-fill-quiet);
-}
-
-.site-head__theme:focus-visible {
-  outline: 2px solid var(--color-brand-primary);
-  outline-offset: 2px;
-}
-
-.site-head__theme::before {
-  content: "";
-  position: absolute;
-  inset-block-start: 50%;
-  inset-inline-start: var(--toggle-pad);
-  inline-size: var(--thumb-size);
-  block-size: var(--thumb-size);
-  border-radius: 50%;
-  background: var(--color-fill-loud);
-  translate: 0 -50%;
-  transition: translate var(--transition-base);
-}
-
-[data-mode="dark"] .site-head__theme::before {
-  translate: calc(var(--toggle-height) * 2 - var(--toggle-pad) * 2 - 2px - var(--thumb-size)) -50%;
-}
-
-.site-head__theme .site-head__icon {
-  position: relative;
-  display: block;
-  inline-size: var(--thumb-size);
-  block-size: var(--thumb-size);
-  padding: 0.2rem;
-  box-sizing: border-box;
-  stroke-width: 2.5;
-}
-
-/* The icon sitting on the thumb takes the thumb's contrast color */
-.site-head__theme .site-head__icon--sun {
-  color: var(--color-on-loud);
-}
-
-[data-mode="dark"] .site-head__theme .site-head__icon--sun {
-  color: inherit;
-}
-
-[data-mode="dark"] .site-head__theme .site-head__icon--moon {
-  color: var(--color-on-loud);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .site-head__theme,
-  .site-head__theme::before {
-    transition: none;
-  }
 }
 
 /*

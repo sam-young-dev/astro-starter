@@ -3,6 +3,8 @@ import { siteData } from "../../data/site-data";
 import { isCurrentPath } from "../../utils/nav";
 
 const { pathname } = Astro.url;
+// The brand link already goes home, so Home stays out of the header nav
+const headerNavItems = siteData.navItems.filter((item) => item.href !== "/");
 ---
 
 <header class="site-head" data-site-head>
@@ -26,7 +28,7 @@ const { pathname } = Astro.url;
       </button>
       <nav id="primary-nav" aria-label="Primary" class="nav site-head__nav">
         <ul class="cluster" role="list">
-          {siteData.navItems.map((item) => (
+          {headerNavItems.map((item) => (
             <li>
               <a
                 href={item.href}
@@ -40,45 +42,13 @@ const { pathname } = Astro.url;
           ))}
         </ul>
       </nav>
-      <button
-        class="site-head__button site-head__theme"
-        type="button"
-        data-theme-toggle
-        hidden
-      >
-        <span class="visually-hidden" data-theme-label>
-          Switch to dark mode
-        </span>
-        <svg
-          class="site-head__icon site-head__icon--sun"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="4"></circle>
-          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
-        </svg>
-        <svg
-          class="site-head__icon site-head__icon--moon"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
-        </svg>
-      </button>
     </div>
   </div>
 </header>
 
 <script>
-  import { getMode, setStoredMode } from "../../scripts/theme";
-
   const header = document.querySelector<HTMLElement>("[data-site-head]");
   const toggle = header?.querySelector<HTMLButtonElement>(".site-head__toggle");
-  const themeToggle = header?.querySelector<HTMLButtonElement>(
-    "[data-theme-toggle]",
-  );
-  const themeLabel =
-    themeToggle?.querySelector<HTMLElement>("[data-theme-label]");
 
   if (header && toggle) {
     toggle.hidden = false;
@@ -106,23 +76,5 @@ const { pathname } = Astro.url;
     document.addEventListener("click", (event) => {
       if (!header.contains(event.target as Node)) setOpen(false);
     });
-  }
-
-  if (themeToggle && themeLabel) {
-    themeToggle.hidden = false;
-
-    // The label names the action, and the icon shows the mode the click switches to.
-    const sync = () => {
-      themeLabel.textContent = `Switch to ${getMode() === "dark" ? "light" : "dark"} mode`;
-    };
-
-    themeToggle.addEventListener("click", () => {
-      setStoredMode(getMode() === "dark" ? "light" : "dark");
-      sync();
-    });
-
-    // Keep the label right when the OS scheme changes and no choice has been stored.
-    document.documentElement.addEventListener("themechange", sync);
-    sync();
   }
 </script>
