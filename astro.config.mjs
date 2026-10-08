@@ -2,9 +2,16 @@
 import { defineConfig } from "astro/config";
 import sugarcube from "@sugarcube-sh/vite";
 
+// astro.config.mjs doesn't see .env files by default, so load one if it exists.
+try {
+  process.loadEnvFile();
+} catch {
+  // No .env file; SITE_URL may still come from the host environment.
+}
+
 // https://astro.build/config
 export default defineConfig({
-  site: "http://localhost:4321",
+  site: process.env.SITE_URL || "http://localhost:4321",
   vite: {
     plugins: [sugarcube()],
   },

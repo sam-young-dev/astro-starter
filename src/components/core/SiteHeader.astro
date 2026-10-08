@@ -1,25 +1,71 @@
 ---
-import { siteData } from '../../data/site-data';
+import { siteData } from "../../data/site-data";
+import { isCurrentPath } from "../../utils/nav";
+
+const { pathname } = Astro.url;
 ---
 
-<header class="site-head">
+<header class="site-head" data-site-head>
   <div class="wrapper">
     <div class="repel site-head__inner">
       <div class="site-head__brand">
-        <a href="/">
-          { siteData.title }
-        </a>
+        <a href="/">{siteData.title}</a>
       </div>
-      <nav aria-label="primary" class="nav">
+      <!-- Hidden until the script below enhances the header, so the nav works without JS -->
+      <button
+        class="site-head__toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        hidden
+      >
+        <span class="visually-hidden">Menu</span>
+        <svg class="site-head__toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
+      <nav id="primary-nav" aria-label="Primary" class="nav site-head__nav">
         <ul class="cluster" role="list">
           {siteData.navItems.map((item) => (
-          <li>
-            <a href={item.href} {...(item.current ? {'aria-current': 'page'} : {})}>{item.label}</a>
-          </li>
-        ))}
+            <li>
+              <a href={item.href} {...(isCurrentPath(pathname, item.href) ? { "aria-current": "page" } : {})}>
+                {item.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
     </div>
-    <hr/>
+    <hr />
   </div>
 </header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-site-head]");
+  const toggle = header?.querySelector<HTMLButtonElement>(".site-head__toggle");
+
+  if (header && toggle) {
+    toggle.hidden = false;
+    header.dataset.navJs = "";
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      header.toggleAttribute("data-nav-open", open);
+    };
+
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    header.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!header.contains(event.target as Node)) setOpen(false);
+    });
+  }
+</script>

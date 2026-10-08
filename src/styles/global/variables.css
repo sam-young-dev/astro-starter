@@ -1,5 +1,5 @@
 :root {
-  --gutter: var(--space-m-l);
+  --gutter: var(--space-md-lg);
   --transition-base: 250ms ease;
   --transition-movement: 200ms linear;
   --transition-fade: 300ms ease;
@@ -11,5 +11,5 @@
   --radius-m: 0.75rem;
   --radius-l: 2.5rem;
   --uppercase-kerning: 0.04ch;
-  --indent-size: var(--space-xs-l);
+  --indent-size: var(--space-sm);
 }

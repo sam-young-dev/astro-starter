@@ -7,10 +7,10 @@
 
 body {
   background: var(--color-background-base);
-  color: var(--color-brand-primary);
+  color: var(--color-foreground-primary);
   font-size: var(--size-step-1);
-  font-family: var(--font-base);
-  line-height: var(--leading-standard);
+  font-family: var(--font-body);
+  line-height: var(--leading-body);
   font-size-adjust: from-font;
   min-height: 100dvh;
   margin: 0;
@@ -21,7 +21,7 @@ body {
 }
 
 :is(h1, h2, h3, h4) {
-  line-height: var(--leading-fine);
+  line-height: var(--leading-title);
   text-wrap: balance;
 }
 
@@ -38,15 +38,6 @@ h2 {
 h3 {
   font-size: var(--size-step-4);
   max-width: 35ch;
-}
-
-:is(h1, h2, h3, h4):where(
-  [class*="text-step-10"],
-  [class*="text-step-11"],
-  [class*="text-step-12"]
-) {
-  line-height: var(--leading-micro);
-  font-weight: var(--font-black);
 }
 
 :is(h4, h5, h6) {
@@ -102,7 +93,7 @@ kbd {
 
 var {
   font-style: normal;
-  font-weight: var(--font-medium);
+  font-weight: var(--font-weight-medium);
 }
 
 q {
@@ -128,7 +119,7 @@ ul ::marker {
 
 ol ::marker {
   font-size: 1em;
-  font-weight: var(--font-bold);
+  font-weight: var(--font-weight-bold);
 }
 
 /* Lists with classes and roles will be out of standard flow, so remove the default spacing */
@@ -139,7 +130,7 @@ ol ::marker {
 }
 
 dt {
-  font-weight: var(--font-medium);
+  font-weight: var(--font-weight-medium);
 }
 
 dt + dd {
@@ -147,7 +138,7 @@ dt + dd {
 }
 
 dd + dt {
-  margin-block-start: var(--space-s);
+  margin-block-start: var(--space-sm);
 }
 
 dd {
@@ -156,12 +147,11 @@ dd {
 
 blockquote {
   margin-inline: 0;
-  color: var(--color-foreground-inverse);
 }
 
 blockquote footer {
-  margin-block-start: var(--space-s);
-  color: var(--color-brand-primary);
+  margin-block-start: var(--space-sm);
+  color: var(--color-foreground-secondary);
   font-size: var(--size-step-0);
 }
 
@@ -196,17 +186,17 @@ table {
 
 th {
   text-align: left;
-  font-weight: var(--font-bold);
-  line-height: var(--leading-fine);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-title);
 }
 
 thead th {
-  padding-block: var(--space-s);
+  padding-block: var(--space-sm);
 }
 
 td,
 th {
-  padding: var(--space-xs) var(--space-s);
+  padding: var(--space-xs) var(--space-sm);
 }
 
 th:not(:only-of-type) {
@@ -227,7 +217,7 @@ tr + tr :is(th, td) {
 
 caption {
   caption-side: bottom;
-  margin-block-start: var(--space-s);
+  margin-block-start: var(--space-sm);
 }
 
 a:not([class]):hover {
@@ -308,8 +298,8 @@ form > * + * {
   padding: 0.5em 0.8em;
   border-radius: var(--radius-s);
   border: var(--stroke-solid);
-  background: var(--color-fill-loud);
-  color: var(--color-foreground-inverse);
+  background: var(--color-background-surface);
+  color: var(--color-foreground-primary);
   width: 100%;
 
   &::placeholder {
@@ -319,8 +309,8 @@ form > * + * {
 }
 
 label {
-  line-height: var(--leading-fine);
-  font-weight: var(--font-medium);
+  line-height: var(--leading-title);
+  font-weight: var(--font-weight-medium);
 }
 
 label::after {
@@ -332,12 +322,12 @@ label::after {
 label:has(input) {
   display: flex;
   align-items: baseline;
-  gap: var(--space-s);
-  font-weight: var(--font-normal);
+  gap: var(--space-sm);
+  font-weight: var(--font-weight-normal);
 }
 
 label:has(input) + label:has(input) {
-  --flow-space: var(--space-s-m);
+  --flow-space: var(--space-sm-md);
 }
 
 /* Slightly adjusts the vertical position of the check/radio */
@@ -356,19 +346,19 @@ label input:disabled + * {
 
 fieldset {
   border: var(--stroke);
-  padding: var(--space-s);
+  padding: var(--space-sm);
 }
 
 legend {
-  font-weight: var(--font-medium);
+  font-weight: var(--font-weight-medium);
   padding-inline: var(--space-xs);
 }
 
 summary {
-  font-weight: var(--font-bold);
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
 }
 
 details[open] summary {
-  margin-block-end: var(--space-s);
+  margin-block-end: var(--space-sm);
 }

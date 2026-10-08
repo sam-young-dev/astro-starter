@@ -1,15 +1,12 @@
 ---
-const year = new Date().getFullYear()
-import { siteData } from '../../data/site-data'
+import { siteData } from "../../data/site-data";
+
+const year = new Date().getFullYear();
 ---
 
 <footer class="site-foot">
   <div class="wrapper repel">
-    <p>&copy; {siteData.title} <span id="footer-year">{year}</span></p>
+    <p>&copy; {siteData.title} {year}</p>
     <p>All rights reserved.</p>
   </div>
 </footer>
-
-<script is:inline>
-  document.getElementById("footer-year").innerText = new Date().getFullYear();
-</script>

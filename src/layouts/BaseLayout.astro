@@ -1,22 +1,39 @@
 ---
-import MetaInfo from '../components/core/MetaInfo.astro';
-import Header from '../components/core/SiteHeader.astro';
-import SiteFooter from '../components/core/SiteFooter.astro';
+import MetaInfo from "../components/core/MetaInfo.astro";
+import SiteHeader from "../components/core/SiteHeader.astro";
+import SiteFooter from "../components/core/SiteFooter.astro";
+import { siteData } from "../data/site-data";
 
 import "virtual:sugarcube.css";
 import "../styles/index.css";
 
-const { title, description, socialImage, allowRobots } = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+  socialImage?: string;
+  allowRobots?: boolean;
+}
+
+const {
+  title,
+  description = siteData.description,
+  socialImage,
+  allowRobots = true,
+} = Astro.props;
+
+const pageTitle = title ? `${title} | ${siteData.title}` : siteData.title;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <MetaInfo
-      title={title}
+      title={pageTitle}
       description={description}
       canonicalURL={canonicalURL}
       socialImage={socialImage}
@@ -24,7 +41,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
   </head>
   <body>
-    <Header />
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteHeader />
     <main tabindex="-1" id="main-content">
       <slot />
     </main>

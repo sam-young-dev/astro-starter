@@ -1,46 +1,45 @@
-# Astro Starter Kit: Basics
+# Astro Starter
+
+An [Astro](https://astro.build) starter using [Sugarcube](https://sugarcube.sh) design tokens and [CUBE CSS](https://cube.fyi).
+
+## Getting started
 
 ```sh
-pnpm create astro@latest -- --template basics
+pnpm install
+cp .env.example .env   # set SITE_URL to your production URL
+pnpm dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+| Command        | Action                                      |
+| :------------- | :------------------------------------------ |
+| `pnpm dev`     | Start the dev server at `localhost:4321`    |
+| `pnpm build`   | Build the production site to `./dist/`      |
+| `pnpm preview` | Preview the build locally                   |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Project structure
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+src/
+├── components/   core/ (header, footer, meta) plus optional masthead, hero, closer
+├── data/         site-data.ts: site title, description and nav links
+├── design-tokens/ Sugarcube tokens (JSON); edit these, not generated CSS
+├── layouts/      BaseLayout.astro
+├── pages/        one file per route
+├── styles/       CUBE CSS: global, compositions, utilities, blocks
+└── utils/
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Starting a new project
 
-## 🧞 Commands
+1. Edit `src/data/site-data.ts` (title, description, nav).
+2. Set `SITE_URL` in `.env` (and in your host's environment for deploys).
+3. Adjust the brand colours in `src/design-tokens/colors.json`.
+4. Delete the optional blocks you don't need (masthead, hero, closer) along with their CSS in `src/styles/blocks/` and their `@import` in `src/styles/index.css`.
 
-All commands are run from the root of the project, from a terminal:
+## Notes
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Styling:** use tokens (`var(--space-md)`, `var(--color-brand-primary)`) rather than raw values. Run `pnpm build` and check the generated CSS if you're unsure a token exists.
+- **Mobile nav:** below 40rem the header collapses to a menu button. Without JavaScript the nav simply stays visible. The breakpoint is a literal in `site-head.css` because CSS variables can't be used in media queries.
+- **Dark mode:** the dark token set applies under `[data-mode="dark"]` on `<html>`. Nothing sets it yet; add a toggle or `prefers-color-scheme` script if you want it.

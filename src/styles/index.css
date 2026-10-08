@@ -15,6 +15,7 @@
 @import "./utilities/visually-hidden.css";
 
 @import "./blocks/prose.css";
+@import "./blocks/skip-link.css";
 @import "./blocks/site-head.css";
 @import "./blocks/site-foot.css";
 @import "./blocks/hero.css";
