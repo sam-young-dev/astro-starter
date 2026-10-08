@@ -24,8 +24,8 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgb(0 0 0 / 0%) 0%,
-    rgb(0 0 0 / 50%) 100%
+    var(--color-alpha-black-00) 0%,
+    var(--color-alpha-black-50) 100%
   );
 }
 

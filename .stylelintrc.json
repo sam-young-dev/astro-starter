@@ -1,0 +1,29 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "color-no-hex": true,
+    "function-disallowed-list": [
+      "rgb",
+      "rgba",
+      "hsl",
+      "hsla",
+      "hwb",
+      "lab",
+      "lch",
+      "oklab",
+      "oklch"
+    ],
+    "declaration-property-value-disallowed-list": {
+      "/^(color|background(-color)?|border(-.+)?-color|outline-color|fill|stroke)$/": [
+        "/^(red|green|blue|black|white|gray|grey)$/i"
+      ]
+    },
+    "selector-class-pattern": null,
+    "custom-property-pattern": null,
+    "comment-empty-line-before": null,
+    "no-descending-specificity": null,
+    "property-no-vendor-prefix": null,
+    "property-no-deprecated": null
+  },
+  "overrides": [{ "files": ["**/*.astro"], "customSyntax": "postcss-html" }]
+}

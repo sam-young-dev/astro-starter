@@ -4,7 +4,11 @@
   line-height: var(--leading-none);
   font-size: var(--size-step--1);
   font-weight: var(--font-weight-bold);
-  padding-block-start: var(--space-md);
+  padding-block: var(--space-md);
+}
+
+.site-head a {
+  text-decoration: none;
 }
 
 .site-head .repel {
@@ -15,17 +19,7 @@
   flex: 1 1 auto;
 }
 
-.site-head__brand a:not(:hover) {
-  text-decoration: none;
-}
-
-.site-head hr {
-  --flow-space: var(--space-md);
-  --hr-stroke: var(--stroke-width) solid var(--color-brand-primary);
-}
-
-.site-head__toggle {
-  display: none;
+.site-head__button {
   padding: var(--space-3xs);
   border: none;
   background: none;
@@ -33,28 +27,52 @@
   cursor: pointer;
 }
 
-.site-head__toggle-icon {
+.site-head__toggle {
+  display: none;
+}
+
+.site-head__icon {
   width: 1.5rem;
   height: 1.5rem;
   fill: none;
-  stroke: currentColor;
+  stroke: currentcolor;
   stroke-width: 2;
   stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Show the icon for the mode a click switches to */
+.site-head__icon--sun,
+[data-mode="dark"] .site-head__icon--moon {
+  display: none;
+}
+
+[data-mode="dark"] .site-head__icon--sun {
+  display: block;
 }
 
 /*
   Mobile menu. Custom properties can't be used in media queries, so this
   40rem breakpoint is a literal. Keep it in sync if you change it.
+  The open menu overlays the page below the header instead of pushing it down.
   The menu only collapses once JS has set [data-nav-js], so the nav is
   always usable without JavaScript.
 */
 @media (width < 40rem) {
   .site-head[data-nav-js] .site-head__toggle {
     display: inline-flex;
+    order: 1;
   }
 
-  .site-head__nav {
-    flex-basis: 100%;
+  /* .wrapper is the positioned ancestor */
+  .site-head[data-nav-js] .site-head__nav {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 100%;
+    z-index: 1;
+    padding: var(--space-md) var(--wrapper-padding-inline, 1rem);
+    background: var(--color-background-base);
+    border-block-end: var(--stroke-solid);
   }
 
   .site-head[data-nav-js]:not([data-nav-open]) .site-head__nav {

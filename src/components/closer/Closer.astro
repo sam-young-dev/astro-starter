@@ -13,7 +13,12 @@ const { pathname } = Astro.url;
         <ul class="cluster" role="list">
           {siteData.navItems.map((item) => (
             <li>
-              <a href={item.href} {...(isCurrentPath(pathname, item.href) ? { "aria-current": "page" } : {})}>
+              <a
+                href={item.href}
+                {...(isCurrentPath(pathname, item.href)
+                  ? { "aria-current": "page" }
+                  : {})}
+              >
                 {item.label}
               </a>
             </li>

@@ -9,8 +9,16 @@ interface Props {
   allowRobots?: boolean;
 }
 
-const { title, description, canonicalURL, socialImage, allowRobots = true } = Astro.props;
-const socialImageURL = socialImage ? new URL(socialImage, Astro.site) : undefined;
+const {
+  title,
+  description,
+  canonicalURL,
+  socialImage,
+  allowRobots = true,
+} = Astro.props;
+const socialImageURL = socialImage
+  ? new URL(socialImage, Astro.site)
+  : undefined;
 ---
 
 <title>{title}</title>
@@ -25,7 +33,10 @@ const socialImageURL = socialImage ? new URL(socialImage, Astro.site) : undefine
 <meta property="og:url" content={canonicalURL} />
 {socialImageURL && <meta property="og:image" content={socialImageURL} />}
 
-<meta name="twitter:card" content={socialImageURL ? "summary_large_image" : "summary"} />
+<meta
+  name="twitter:card"
+  content={socialImageURL ? "summary_large_image" : "summary"}
+/>
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 {socialImageURL && <meta name="twitter:image" content={socialImageURL} />}

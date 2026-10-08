@@ -12,11 +12,15 @@ pnpm dev
 
 ## Commands
 
-| Command        | Action                                      |
-| :------------- | :------------------------------------------ |
-| `pnpm dev`     | Start the dev server at `localhost:4321`    |
-| `pnpm build`   | Build the production site to `./dist/`      |
-| `pnpm preview` | Preview the build locally                   |
+| Command         | Action                                           |
+| :-------------- | :----------------------------------------------- |
+| `pnpm dev`      | Start the dev server at `localhost:4321`         |
+| `pnpm build`    | Build the production site to `./dist/`           |
+| `pnpm preview`  | Preview the build locally                        |
+| `pnpm check`    | Type-check Astro and TypeScript files            |
+| `pnpm lint`     | ESLint (with jsx-a11y accessibility rules)       |
+| `pnpm lint:css` | Stylelint (flags raw colours that bypass tokens) |
+| `pnpm format`   | Prettier (`format:check` to verify only)         |
 
 ## Project structure
 
@@ -42,4 +46,4 @@ src/
 
 - **Styling:** use tokens (`var(--space-md)`, `var(--color-brand-primary)`) rather than raw values. Run `pnpm build` and check the generated CSS if you're unsure a token exists.
 - **Mobile nav:** below 40rem the header collapses to a menu button. Without JavaScript the nav simply stays visible. The breakpoint is a literal in `site-head.css` because CSS variables can't be used in media queries.
-- **Dark mode:** the dark token set applies under `[data-mode="dark"]` on `<html>`. Nothing sets it yet; add a toggle or `prefers-color-scheme` script if you want it.
+- **Dark mode:** the dark token set applies under `[data-mode="dark"]` on `<html>`. An inline script in `BaseLayout.astro` sets it before first paint from the saved choice, falling back to `prefers-color-scheme`. The header toggle saves an explicit choice to `localStorage` (key `theme`), which then wins over the OS setting.

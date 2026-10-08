@@ -30,6 +30,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="light dark" />
+    <!-- Runs before first paint so a stored or OS-preferred dark mode never flashes light -->
+    <script is:inline>
+      (() => {
+        let mode;
+        try {
+          mode = localStorage.getItem("theme");
+        } catch {
+          // Storage blocked: fall back to the OS setting.
+        }
+        if (mode !== "light" && mode !== "dark") {
+          mode = matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+        document.documentElement.dataset.mode = mode;
+        document.documentElement.style.colorScheme = mode;
+      })();
+    </script>
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <MetaInfo
@@ -41,7 +60,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content">
+      Skip to content
+    </a>
     <SiteHeader />
     <main tabindex="-1" id="main-content">
       <slot />
