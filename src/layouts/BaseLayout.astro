@@ -2,7 +2,9 @@
 import MetaInfo from "../components/core/MetaInfo.astro";
 import SiteHeader from "../components/core/SiteHeader.astro";
 import SiteFooter from "../components/core/SiteFooter.astro";
+import { Font } from "astro:assets";
 import { siteData } from "../data/site-data";
+import { fontVariables } from "../utils/fonts.js";
 
 import "virtual:sugarcube.css";
 import "../styles/index.css";
@@ -31,6 +33,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="light dark" />
+    {fontVariables.map((cssVariable) => <Font cssVariable={cssVariable} preload />)}
     <!-- Runs before first paint so a stored or OS-preferred dark mode never flashes light -->
     <script is:inline>
       (() => {

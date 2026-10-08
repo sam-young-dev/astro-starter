@@ -9,8 +9,6 @@
     },
     "sans": {
       "$value": [
-        "Geist",
-        "Inter",
         "-apple-system",
         "BlinkMacSystemFont",
         "Segoe UI",

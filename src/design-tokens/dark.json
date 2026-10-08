@@ -38,22 +38,92 @@
       }
     },
 
+    "fill": {
+      "quiet": {
+        "$value": "{color.neutral.fill.quiet}"
+      },
+      "normal": {
+        "$value": "{color.neutral.fill.normal}"
+      },
+      "loud": {
+        "$value": "{color.neutral.fill.loud}"
+      }
+    },
+    "on": {
+      "quiet": {
+        "$value": "{color.neutral.on.quiet}"
+      },
+      "normal": {
+        "$value": "{color.neutral.on.normal}"
+      },
+      "loud": {
+        "$value": "{color.neutral.on.loud}"
+      }
+    },
+    "border": {
+      "quiet": {
+        "$value": "{color.neutral.border.quiet}"
+      },
+      "normal": {
+        "$value": "{color.neutral.border.normal}"
+      },
+      "loud": {
+        "$value": "{color.neutral.border.loud}"
+      }
+    },
+
+    "background": {
+      "base": {
+        "$value": "{color.neutral.950}"
+      },
+      "surface": {
+        "$value": "{color.surface.default}"
+      },
+      "elevated": {
+        "$value": "{color.surface.raised}"
+      }
+    },
+
+    "foreground": {
+      "primary": {
+        "$value": "{color.text.normal}"
+      },
+      "secondary": {
+        "$value": "{color.text.quiet}"
+      },
+      "tertiary": {
+        "$value": "{color.text.quieter}"
+      },
+      "inverse": {
+        "$value": "{color.neutral.950}"
+      }
+    },
+
+    "decorative": {
+      "stroke": {
+        "$value": "{color.border.normal}"
+      },
+      "fill": {
+        "$value": "{color.fill.normal}"
+      }
+    },
+
     "neutral": {
       "surface": {
         "default": {
-          "$value": "{color.neutral.950}"
+          "$value": "{color.neutral.900}"
         },
         "raised": {
-          "$value": "{color.neutral.900}"
+          "$value": "{color.neutral.800}"
         },
         "lowered": {
-          "$value": "{color.neutral.900}"
+          "$value": "{color.neutral.950}"
         },
         "lowest": {
-          "$value": "{color.neutral.800}"
+          "$value": "{color.black}"
         },
         "border": {
-          "$value": "{color.neutral.800}"
+          "$value": "{color.neutral.700}"
         }
       },
       "text": {
