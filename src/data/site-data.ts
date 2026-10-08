@@ -1,6 +1,8 @@
+// title and description are edited in Keystatic (Site settings), which writes to site-settings.json.
+import settings from "./site-settings.json";
+
 export const siteData = {
-  title: "Astro Starter",
-  description: "A starter project built with Astro and Sugarcube.",
+  ...settings,
   navItems: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },

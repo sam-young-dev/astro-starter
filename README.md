@@ -27,7 +27,7 @@ pnpm dev
 ```text
 src/
 ├── components/   core/ (header, footer, meta) plus optional masthead, hero, closer
-├── data/         site-data.ts: site title, description and nav links
+├── data/         site-settings.json (title, description; editable in Keystatic) and site-data.ts (nav links)
 ├── design-tokens/ Sugarcube tokens (JSON); edit these, not generated CSS
 ├── layouts/      BaseLayout.astro
 ├── pages/        one file per route
@@ -37,7 +37,7 @@ src/
 
 ## Starting a new project
 
-1. Edit `src/data/site-data.ts` (title, description, nav).
+1. Edit "Site settings" in Keystatic (or `src/data/site-settings.json`) for the title and description, and `src/data/site-data.ts` for the nav links.
 2. Set `SITE_URL` in `.env` (and in your host's environment for deploys).
 3. Adjust the brand colours in `src/design-tokens/colors.json`.
 4. Delete the optional blocks you don't need (masthead, hero, closer) along with their CSS in `src/styles/blocks/` and their `@import` in `src/styles/index.css`.
