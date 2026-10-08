@@ -5,6 +5,7 @@ import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 import markdoc from "@astrojs/markdoc";
 import keystatic from "@keystatic/astro";
+import netlify from "@astrojs/netlify";
 import { fonts } from "./src/utils/fonts.js";
 
 // astro.config.mjs doesn't see .env files by default, so load one if it exists.
@@ -14,18 +15,13 @@ try {
   // No .env file; SITE_URL may still come from the host environment.
 }
 
-// The Keystatic editor needs server routes, so it only runs under `astro dev`.
-// The production build stays fully static.
-const isDev = process.argv.includes("dev");
-
 // https://astro.build/config
 export default defineConfig({
   site: process.env.SITE_URL || "http://localhost:4321",
-  integrations: [
-    sitemap(),
-    markdoc(),
-    ...(isDev ? [react(), keystatic()] : []),
-  ],
+  // Pages stay prerendered static HTML. Only the Keystatic admin (/keystatic)
+  // and its API routes run on demand, as Netlify Functions.
+  adapter: netlify(),
+  integrations: [sitemap(), markdoc(), react(), keystatic()],
   fonts: fonts.map((font) => ({ provider: fontProviders.local(), ...font })),
   vite: {
     plugins: [sugarcube()],

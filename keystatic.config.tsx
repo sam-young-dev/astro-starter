@@ -1,6 +1,6 @@
 import { config, collection, fields } from "@keystatic/core";
 
-// Edits are written straight to the filesystem in dev. Set the GitHub env vars
+// Edits are written straight to the filesystem when no repo is set. Set the GitHub env vars
 // (see .env.example) to commit edits to the repo instead.
 const repo = import.meta.env.PUBLIC_KEYSTATIC_GITHUB_REPO;
 
