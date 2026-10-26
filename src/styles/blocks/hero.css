@@ -69,14 +69,14 @@
 }
 
 /* Transition lives on the base rule so the icon eases back out along the same path it moved in */
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .hero__skip-link:hover .hero__skip-link-icon {
-    transform: translateY(5%);
+    transform: translateY(12%);
   }
 }
 
 .hero__skip-link:focus-visible .hero__skip-link-icon {
-  transform: translateY(5%);
+  transform: translateY(12%);
 }
 
 @media (prefers-reduced-motion: reduce) {

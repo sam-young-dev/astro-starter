@@ -85,23 +85,23 @@
     padding: var(--space-md) var(--wrapper-padding-inline, 1rem);
     background: var(--color-background-base);
     border-block-end: var(--stroke-solid);
-    transform-origin: top right;
     transition:
-      opacity var(--transition-release),
-      translate var(--transition-release),
+      opacity var(--transition-movement),
+      translate var(--transition-movement),
       visibility 0s;
   }
 
-  /* Closed: stays rendered so it can animate, but is hidden from focus and AT once faded out */
+  /* Closed: stays rendered so it can animate, but is hidden from focus and AT once faded out.
+     Closing is a system response, so it snaps; keep the visibility delay equal to the duration. */
   .site-head[data-nav-js]:not([data-nav-open]) .site-head__nav {
     opacity: 0;
     visibility: hidden;
     translate: 0 -0.5rem;
     pointer-events: none;
     transition:
-      opacity var(--transition-release),
-      translate var(--transition-release),
-      visibility 0s linear 250ms;
+      opacity var(--transition-snap),
+      translate var(--transition-snap),
+      visibility 0s linear 140ms;
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -23,12 +23,12 @@
   font-size: var(--size-step--1);
   font-weight: var(--font-weight-bold);
   transition:
-    transform var(--transition-release),
+    transform var(--transition-snap),
     filter var(--transition-base);
 }
 
-/* Hover only exists on pointer devices, so it never sticks after a tap */
-@media (hover: hover) {
+/* Hover only exists on precise pointer devices, so it never sticks after a tap */
+@media (hover: hover) and (pointer: fine) {
   .button:hover {
     filter: brightness(108%);
   }

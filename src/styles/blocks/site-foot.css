@@ -94,6 +94,8 @@
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
+  /* Color flips in step with the thumb's slide so an icon never vanishes before the thumb arrives */
+  transition: color var(--transition-release);
 }
 
 /* The icon sitting on the thumb takes the footer background color */
@@ -108,7 +110,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .site-foot__theme::before {
+  .site-foot__theme::before,
+  .site-foot__icon {
     transition: none;
   }
 }

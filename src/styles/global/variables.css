@@ -6,6 +6,7 @@
   --transition-fade: 300ms ease;
   --transition-press: 100ms ease-out;
   --transition-release: 250ms var(--ease-out);
+  --transition-snap: 140ms var(--ease-out);
   --stroke-width: 1px;
   --stroke: var(--stroke-width) dashed var(--color-decorative-stroke);
   --stroke-solid: var(--stroke-width) solid var(--color-decorative-stroke);
