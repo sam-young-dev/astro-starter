@@ -17,10 +17,21 @@ const readStored = (): Mode | null => {
 export const getMode = (): Mode =>
   root.dataset.mode === "dark" ? "dark" : "light";
 
-const apply = (mode: Mode) => {
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+const swap = (mode: Mode) => {
   root.dataset.mode = mode;
   root.style.colorScheme = mode;
   root.dispatchEvent(new Event("themechange"));
+};
+
+// Cross-fade the whole page so dark/light never jumps in brightness. Falls back to an instant swap.
+const apply = (mode: Mode) => {
+  if (!document.startViewTransition || reducedMotion.matches) {
+    swap(mode);
+    return;
+  }
+  document.startViewTransition(() => swap(mode));
 };
 
 /** Pin the mode as an explicit user choice. It wins over the OS setting from now on. */

@@ -55,6 +55,7 @@
   background: var(--skip-link-color);
   color: var(--color-neutral-on-loud);
   border-radius: 50%;
+  transition: transform var(--transition-release);
 }
 
 .hero__skip-link-icon__inner {
@@ -67,7 +68,23 @@
   color: var(--color-neutral-on-loud);
 }
 
-.hero__skip-link:hover .hero__skip-link-icon {
+/* Transition lives on the base rule so the icon eases back out along the same path it moved in */
+@media (hover: hover) {
+  .hero__skip-link:hover .hero__skip-link-icon {
+    transform: translateY(5%);
+  }
+}
+
+.hero__skip-link:focus-visible .hero__skip-link-icon {
   transform: translateY(5%);
-  transition: transform var(--transition-bounce);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__skip-link-icon {
+    transition: none;
+  }
+
+  .hero__skip-link:is(:hover, :focus-visible) .hero__skip-link-icon {
+    transform: none;
+  }
 }

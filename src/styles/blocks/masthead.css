@@ -12,6 +12,7 @@
   font-weight: var(--font-weight-medium);
   margin-block-start: var(--space-md);
   line-height: var(--leading-none);
+  letter-spacing: -0.025em;
 }
 
 .masthead__location {
