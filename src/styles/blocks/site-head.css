@@ -8,7 +8,15 @@
 }
 
 .site-head a {
+  position: relative;
   text-decoration: none;
+}
+
+/* Invisible hit area so links reach ~44px without changing layout */
+.site-head a::after {
+  content: "";
+  position: absolute;
+  inset: -0.75rem -0.25rem;
 }
 
 .site-head__nav a[aria-current="page"] {
@@ -26,11 +34,19 @@
 }
 
 .site-head__button {
+  position: relative;
   padding: var(--space-3xs);
   border: none;
   background: none;
   color: inherit;
   cursor: pointer;
+}
+
+/* 30px icon button grows to a 44px+ hit area */
+.site-head__button::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
 }
 
 .site-head__toggle {
@@ -69,10 +85,32 @@
     padding: var(--space-md) var(--wrapper-padding-inline, 1rem);
     background: var(--color-background-base);
     border-block-end: var(--stroke-solid);
+    transition:
+      opacity var(--transition-movement),
+      translate var(--transition-movement),
+      visibility 0s;
   }
 
+  /* Closed: stays rendered so it can animate, but is hidden from focus and AT once faded out.
+     Closing is a system response, so it snaps; keep the visibility delay equal to the duration. */
   .site-head[data-nav-js]:not([data-nav-open]) .site-head__nav {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 -0.5rem;
+    pointer-events: none;
+    transition:
+      opacity var(--transition-snap),
+      translate var(--transition-snap),
+      visibility 0s linear 140ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-head[data-nav-js] .site-head__nav,
+    .site-head[data-nav-js]:not([data-nav-open]) .site-head__nav {
+      translate: none;
+      transition-property: opacity, visibility;
+      transition-duration: 150ms;
+    }
   }
 
   .site-head[data-nav-js] .site-head__nav .cluster {

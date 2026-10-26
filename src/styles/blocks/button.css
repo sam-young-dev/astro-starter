@@ -4,9 +4,10 @@
   --button-x-padding: 0.75em;
   --button-y-padding: 0.5em;
   --button-gutter: 0.5ch;
-  --focus-color: var(--color-interactive-fill-default);
+  --focus-ring-color: var(--color-interactive-fill-default);
 
   display: inline-flex;
+  min-block-size: 2.75rem;
   gap: var(--button-gutter);
   align-items: center;
   line-height: var(--leading-none);
@@ -21,20 +22,45 @@
   text-decoration: none;
   font-size: var(--size-step--1);
   font-weight: var(--font-weight-bold);
+  transition:
+    transform var(--transition-snap),
+    filter var(--transition-base);
 }
 
-.button:hover {
-  filter: brightness(105%);
+/* Hover only exists on precise pointer devices, so it never sticks after a tap */
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    filter: brightness(108%);
+  }
 }
 
+/* Press responds instantly, release eases back */
 .button:active {
-  transform: scale(99%);
+  transform: scale(0.97);
+  transition-duration: 100ms;
+}
+
+.button:is(:disabled, [aria-disabled="true"]) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: filter var(--transition-base);
+  }
+
+  .button:active {
+    transform: none;
+    filter: brightness(92%);
+  }
 }
 
 /* Variant exceptions */
 .button[data-button-variant="secondary"] {
   --button-bg: var(--color-fill-loud);
   --button-text: var(--color-on-loud);
-  --focus-color: var(--color-brand-dark);
+  --focus-ring-color: var(--color-brand-dark);
   --corner-secondary-color: var(--color-brand-primary);
 }

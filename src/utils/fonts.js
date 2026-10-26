@@ -11,6 +11,10 @@ import { readdirSync } from "node:fs";
 
 const FONTS_DIR = "./src/fonts";
 
+// The family used for body and headings (--font-primary). Leave null to use the
+// first family found, or set a family name such as "Archivo" to be explicit.
+const PRIMARY_FAMILY = null;
+
 const WEIGHTS = {
   thin: 100,
   extralight: 200,
@@ -75,6 +79,11 @@ const scanned = scan();
 
 /** CSS variables for every font found, e.g. for <Font> tags in the layout. */
 export const fontVariables = scanned.map((f) => f.cssVariable);
+
+/** CSS variable of the primary font, or undefined when src/fonts is empty. */
+export const primaryFontVariable = (
+  scanned.find((f) => f.name === PRIMARY_FAMILY) ?? scanned[0]
+)?.cssVariable;
 
 /** Font entries for astro.config.mjs; add `provider: fontProviders.local()` to each. */
 export const fonts = scanned.map(({ name, cssVariable, variants }) => ({

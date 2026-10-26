@@ -73,6 +73,18 @@ const headerNavItems = siteData.navItems.filter((item) => item.href !== "/");
       }
     });
 
+    // Tapping a link navigates, so the menu shouldn't stay open behind it
+    header.querySelector(".site-head__nav")?.addEventListener("click", (event) => {
+      if ((event.target as Element).closest("a")) setOpen(false);
+    });
+
+    // Keep aria-expanded honest when the viewport grows past the mobile breakpoint
+    window
+      .matchMedia("(width >= 40rem)")
+      .addEventListener("change", (event) => {
+        if (event.matches) setOpen(false);
+      });
+
     document.addEventListener("click", (event) => {
       if (!header.contains(event.target as Node)) setOpen(false);
     });
