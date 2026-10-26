@@ -9,7 +9,8 @@ body {
   background: var(--color-background-base);
   color: var(--color-foreground-primary);
   font-size: var(--size-step-1);
-  font-family: var(--font-body);
+  /* --font-primary is set in BaseLayout from src/fonts; --font-body is the system fallback stack */
+  font-family: var(--font-primary), var(--font-body);
   line-height: var(--leading-body);
   font-size-adjust: from-font;
   min-height: 100dvh;
@@ -237,15 +238,15 @@ a:not([class]):hover {
 }
 
 :focus-visible {
-  outline: 2px solid var(--focus-color, currentColor);
-  outline-offset: var(--focus-offset, 0.2lh);
+  outline: var(--focus-ring-width) var(--focus-ring-style) var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
 }
 
 /* Firefox is the only browser that doesn't outline the whole element unless you make it display: inline-block. That in itself causes multiple flow issues so we can detect it, using its own vendor prefix and reduce focus offset
 */
 @supports (-moz-appearance: none) {
   :root {
-    --focus-offset: 0.08em;
+    --focus-ring-offset: 0.08em;
   }
 }
 

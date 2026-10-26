@@ -1,6 +1,4 @@
 :root {
-  --font-sans: var(--font-archivo), -apple-system, blinkmacsystemfont, "Segoe UI",
-    roboto, "Helvetica Neue", sans-serif;
   --gutter: var(--space-md-lg);
   --transition-base: 250ms ease;
   --transition-movement: 200ms linear;
